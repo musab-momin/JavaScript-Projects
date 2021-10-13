@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review</title>
+    <link rel="stylesheet" href="review.css">
+</head>
+<body>
+    <main class="container">
+        <h1>Our Review</h1>
+        <div class="img-div">
+            <img src="" alt="#" id="img" />
+        </div>
+        <div class='title'>
+            <h3 id='name'>Susan Smith</h3>
+            <label for='name' id="designation">WEB DEVELOPER</label>
+        </div>
+        <div class='info'>
+            <p id="info">
+                In this tutorial, you will learn how to create a carousel of reviews with a button that generates random
+                reviews.
+                This is a good feature to have on an ecommerce site to display customer reviews or a personal portfolio to
+                display client reviews.
+            </p>
+        </div>
+        <div class='btn-div'>
+            <button class='btn' onclick="changeIndex('back')">back</button>
+            <button class='btn' onclick="changeIndex('forward')">forward</button>
+        </div>
+        <div class='btn-div'>
+            <button class='btn' onclick="changeIndex('surprice')">surprice me</button>
+        </div>
+    </main>
+    <script src="reviews.js"></script>
+</body>
+</html>

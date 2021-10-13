@@ -1,0 +1,103 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background:#f1f6f9;
+  }
+  
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
+  }
+  
+  
+  h1{
+    font-size: 2.5rem;
+    word-spacing: .2em;
+    font-weight: 600;
+  }
+  
+  h4{
+    letter-spacing: #121212;
+    text-transform: capitalize;
+    line-height: 1.25;
+    font-size: 0.875rem;
+    letter-spacing: 1px;
+    
+  }
+  
+  li{
+    list-style: none;
+  }
+  .container{
+    width: 70%;
+    margin: 1em auto;
+    margin-top: 6em;
+    text-align: center;
+    /* border: 2px solid crimson; */
+  }
+  .menu-list{
+    width: 40%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+  }
+  .btn{
+    font-size: 1rem;
+    padding: .5em .5em;
+    background: #f1f6f9;
+    color: #cca261;
+    border: none;
+    text-transform: capitalize;
+    transition: background .6s linear;
+    border-radius: 5px;
+  }
+  .btn:hover{
+    background: #cca261;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  .food{
+    width: 90%;
+    margin: 3em auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2em;
+    justify-content: space-between;
+    /* border: 2px solid crimson; */
+  }
+  
+  .food > div{
+    width: 40%;
+    margin: 1em 0;
+    display: flex;
+    gap: 1.5em;
+  
+    
+  }
+  .food > div > div > div{
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  img{
+    width: 250px;
+    height: 150px;
+    border: 5px solid #cca261;
+    border-radius: 5px;
+  }
+  hr{
+    border-style: dashed;
+  }
+  label{
+    color: #cca261;
+    font-weight: 600;
+  }
