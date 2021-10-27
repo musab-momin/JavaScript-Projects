@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>General Quiz</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <section style="margin: 2em auto; text-align: center;" class="loader">
+        <h1>Loading...</h1>
+    </section>
+    <main>
+        <section class="quiz-form">
+                <form class="frm">
+                    <h1>Setup Quiz</h1>
+                    <div>
+                        <label for='number'>Number of questions</label>
+                        <input 
+                        type = 'number' 
+                        id='number'  
+                        name='number'
+                        />
+                    </div>
+                    <div>
+                        <label for='category'>Category</label>
+                        <select name='category' id='category'>
+                            <option value='21' name='category'>Sports</option>
+                            <option value='23' name='category'>History</option>
+                            <option value='24' name='category'>Politics</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for='dificulty'>Dificulty</label>
+                        <select name='difficulty' id='deficulty'>
+                            <option value='easy'>easy</option>
+                            <option value='medium'>midium</option>
+                            <option value='hard'>hard</option>
+                        </select>
+                    </div>
+                    <div>
+                        <button type='submit' class='btn'>Create</button>
+                    </div>
+                </form>
+        </section>
+        <section class="questions-sec">
+            
+        </section>
+    
+        <section class="result">
+            <div>
+                <h2>Congrats</h2>
+                <p class="para">You answered 10% question correctly</p>
+                <div>
+                    <button class="next-btn" onclick="backToNorm()">Play again</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="index.js"></script>
+</body>
+</html>
