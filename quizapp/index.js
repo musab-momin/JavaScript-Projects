@@ -37,7 +37,6 @@ const handleSubmit = (e)=>
 const fetchQuestions = async ()=>
 {
     const url = `https://opentdb.com/api.php?amount=${numberValue.value}&category=${categoryValue.value}&difficulty=${dificultyValue.value}&type=multiple`;
-    console.log(url);
     try
     {
         const response = await fetch(url);
