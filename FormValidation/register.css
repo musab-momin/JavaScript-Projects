@@ -26,28 +26,23 @@ body{
 }
 
 .poster{
-    width: 50%;
+    width: 40%;
     height: 100vh;
+    background-image: url('pexels-ann-h-1762851.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
     overflow: hidden;
 }
-.banner{
-    position: relative;
-}
-.banner img{
-    width: 100%;
-    height: 100%;
-}
-
 .greet{
-    position: absolute;
-    top: 40%;
-    left: 10px;
+    margin: auto auto; 
     display: grid;
     justify-items: center;
 }
 
 .greet h1{
-    font-size: 39px;
+    font-size: 32px;
     font-weight: 700;
     color: #fff;
     /* text-shadow: 4px 3px 8px rgba(0,0,0,0.15); */
