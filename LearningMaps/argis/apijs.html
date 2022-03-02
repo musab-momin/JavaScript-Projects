@@ -1,0 +1,167 @@
+// var map  = null
+// const setupMap = (center) => {
+//     map = new ol.Map({
+//     target: "map",
+//     layers: [
+//       new ol.layer.Tile({
+//         source: new ol.source.OSM(),
+//       }),
+//     ],
+//     view: new ol.View({
+//       center: ol.proj.fromLonLat(center),
+//       zoom: 4,
+//     }),
+//   });
+
+// //   map.on("click", (eve)=>{
+// //       console.log(eve.coordinate)
+// //   })
+
+// };
+
+// const successLocation = (position) => {
+//   console.log(position);
+//   setupMap([37.41, 8.82]);
+// };
+
+// const errorLocation = (position) => {
+//     setupMap([37.41, 8.82]);
+// };
+
+// const getCurrentLocation = () => {
+
+//     return navigator.geolocation.getCurrentPosition(
+//     successLocation,
+//     errorLocation,
+//     { enableHighAccuracy: true }
+//   );
+// };
+
+// const submitBtn = document.getElementById("pincode-btn");
+// submitBtn.addEventListener("click", (eve)=>{
+//     const pincode = document.getElementById("pincode").value;
+//     map.getView().setZoom(map.getView().getZoom() + 10)
+//     if(pincode == 400024)  map.getView().setCenter(ol.proj.fromLonLat([72.888, 19.0643]))
+//     else map.getView().setCenter(ol.proj.fromLonLat([78.4867, 17.3850]))
+// })
+
+// window.onload = () => {
+//   getCurrentLocation();
+// };
+
+const apiKey =
+  "AAPK61f9887633704099911e625755b25af87h13Iido7DuhNJcSbZpCRsrvJ0vi62Pt-avhUUEXVA4A_LWfHU7qkXQ9pWuVPpiP";
+
+const baseUrl = "https://basemaps-api.arcgis.com/arcgis/rest/services/styles";
+let basemapURL = `${baseUrl}/ArcGIS:DarkGray?type=style&token=${apiKey}`;
+
+const map = new ol.Map({ target: "map" });
+const view = new ol.View({
+  center: ol.proj.fromLonLat([72.8295, 18.975]),
+  zoom: 11,
+  rotation: 0.5
+});
+
+
+const baseLayer = new ol.layer.Tile({
+  source: new ol.source.OSM()
+  }
+)
+
+map.setView(view);
+map.addLayer(baseLayer);
+
+const addMarksToMap = (basemapURL) => {
+  olms(map, basemapURL).then(function (map) {
+    const placesLayer = new ol.layer.Vector({
+      source: new ol.source.Vector(),
+
+      style: (feature) =>
+        new ol.style.Style({
+          image: new ol.style.Circle({
+            radius: 5,
+            fill: new ol.style.Fill({ color: "white" }),
+            stroke: new ol.style.Stroke({
+              color: "hsl(220, 80%, 40%)",
+              width: 2,
+            }),
+          }),
+          text: new ol.style.Text({
+            font: "14px sans-serif",
+            textAlign: "left",
+            text: feature.get("PlaceName"),
+            offsetX: 8, // move text to the right to avoid overlapping circle
+            offsetY: 2, // move down to align with circle's center
+            fill: new ol.style.Fill({ color: "hsl(0, 100%, 50%)" }),
+          }),
+        }),
+      declutter: true,
+    });
+
+    map.addLayer(placesLayer);
+
+    function showPlaces() {
+      const authentication = new arcgisRest.ApiKey({
+        key: apiKey,
+      });
+      const category = document.getElementById("places-select").value;
+      arcgisRest
+        .geocode({
+          authentication,
+          outFields: "Place_addr,PlaceName", // attributes to be returned
+
+          params: {
+            category,
+            location: ol.proj.toLonLat(view.getCenter()),
+            maxLocations: 25,
+          },
+        })
+
+        .then((response) => {
+          const features = new ol.format.GeoJSON({
+            featureProjection: view.getProjection(),
+          }).readFeatures(response.geoJson);
+          placesLayer.getSource().clear();
+          placesLayer.getSource().addFeatures(features);
+        })
+
+        .catch((error) => {
+          alert(
+            "There was a problem using the geocoder. See the console for details."
+          );
+          console.error(error);
+        });
+    }
+
+    document
+      .getElementById("places-select")
+      .addEventListener("change", showPlaces);
+  });
+};
+
+
+const setBasemap = (name) => {
+  //  Clear out existing layers.
+  map.setLayerGroup(new ol.layer.Group());
+  //  Instantiate the given basemap layer.
+  basemapURL = `https://basemaps-api.arcgis.com/arcgis/rest/services/styles/${name}?type=style&token=${apiKey}`;
+  addMarksToMap(basemapURL);
+};
+const basemapsSelectElement = document.querySelector("#basemaps");
+basemapsSelectElement.addEventListener("change", (e) => {
+  setBasemap(e.target.value);
+});
+
+
+
+const handleDropDown = (eve) => {
+  const dropDownMenu = document.querySelector(".filters_dropdown");
+  dropDownMenu.classList.toggle("remove");
+};
+
+window.onload = () => {
+  const dropdownBtn = document.querySelector(".filters_drop-btn");
+  dropdownBtn.addEventListener("click", handleDropDown);
+
+  const dropDownList = document.querySelectorAll(".filters__checkbox");
+}

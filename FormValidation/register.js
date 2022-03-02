@@ -5,6 +5,9 @@ let nameWarning = document.querySelectorAll('.name-warning');
 let emailWarning = document.querySelector('.email-warning');
 let passwordWarning = document.querySelectorAll('.password-warning');
 let thirdRow = document.getElementById('third-row');
+let toggleBtn = document.querySelector('.link');
+let poster = document.querySelector('.poster');
+let container = document.querySelector('.container');
 
 const nameValidator = (name)=>
 {
@@ -107,3 +110,8 @@ frm.addEventListener('submit', (e)=>
 })
 
 
+toggleBtn.addEventListener('click', () => 
+{
+    poster.classList.add("flip");
+    container.classList.add("flip");
+})

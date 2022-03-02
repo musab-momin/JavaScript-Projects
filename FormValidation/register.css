@@ -8,6 +8,7 @@
 
 body{
     font-family: 'Poppins', sans-serif;
+    overflow: hidden;
 }
 
 
@@ -26,6 +27,8 @@ body{
 }
 
 .poster{
+    position: absolute;
+    left: 0;
     width: 40%;
     height: 100vh;
     background-image: url('pexels-ann-h-1762851.jpg');
@@ -35,6 +38,12 @@ body{
     align-items: center;
     overflow: hidden;
 }
+
+.poster.flip{
+    right: 0;
+    border: 1px solid crimson;
+}
+
 .greet{
     margin: auto auto; 
     display: grid;
@@ -89,13 +98,17 @@ span{
 }
 
 .container{
+    position: absolute;
+    right: 0;
     width: 60%;
     margin: 6em auto;
     display: grid;
     justify-content: center;
     align-items: center;
 }
-
+.container.flip{
+    left: 0;
+}
 .frm{
     background: #fff;
     width: 400px;
@@ -153,4 +166,71 @@ span{
     color: #fff;
     font-size: 1rem;
     border-radius: 5px;
+}
+
+
+.toast{
+    position: absolute;
+    bottom: -20%;
+    left: 58%;
+    width: 350px;
+    height: 50px;
+    border-radius: 5px;
+    background: #666;
+    display: grid;
+    justify-items: center;
+    text-align: center;
+    padding: .5em .3em;
+    opacity: 0;
+}
+.toast > span{
+    color: #fff;
+    text-shadow: none;
+}
+.toast-animation{
+    animation: popup 3s ease;   
+}
+
+@keyframes popup {
+    0%{
+        bottom: 0%; 
+        opacity: 0;
+    }
+    50%{
+        bottom: 5%;
+        opacity: 1;
+    }
+    100%{
+        bottom: -20%;
+        opacity: 0;
+    }
+    
+}
+
+.mssg{
+    margin-bottom: 1em;
+    padding: 1em 1em;
+    border-radius: 5px;
+    color: #fff;
+    opacity: 0;
+    animation: mssg-animation 3s linear;
+}
+.mssg.danger{
+    background: #d9534f ;
+}
+.mssg.success{
+    background: #5cb85c;
+}
+
+@keyframes mssg-animation {
+    0%{
+        opacity: 0;
+    }
+    50%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+    }
+    
 }

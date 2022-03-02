@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .extension-btn {
+        position: fixed;
+        right: 0;
+        top: 20%;
+        width: 32px;
+        height: 110px;
+        /* max-height: 110px; */
+        margin: 0 auto;
+        background: #fff;
+        border: none;
+        background: #ff6464;
+        animation: extension_animation 200ms linear;
+        transition: all;
+        z-index: 3147483647 !important;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+        display: flex;
+        flex-direction: column;
+        /* justify-content: space-between; */
+        align-items: center;
+      }
+      .extension-btn:focus {
+        outline: none;
+      }
+      @keyframes extension_animation {
+        from {
+          right: -10%;
+        }
+        to {
+          right: 5px;
+        }
+      }
+
+      .comp-name {
+        writing-mode: vertical-rl;
+        margin: 0 auto;
+        padding-top: 14px;
+        padding-left: 2px;
+        font-size: 14px;
+        color: #fff;
+        font-weight: 600;
+      }
+
+      .img-container {
+        margin: 5px 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        color: #fff;
+        /* border: 1px solid #fff; */
+
+        /* border-bottom: 1px dashed #FFE3E3; */
+      }
+      .extension-icon {
+        width: 20px;
+        height: 25px;
+        margin: 0 auto;
+      }
+      .drag-btn {
+        cursor: grab;
+        width: 150%;
+        height: 25px;
+        margin-top: 10px;
+        /* margin-left: -0.6rem; */
+        background: transparent;
+        filter: alpha(opacity=50);
+        border-radius: 5px;
+        display: grid;
+        justify-items: center;
+      }
+
+      .drag-btn:hover > #cube {
+        width: 50%;
+        height: max-content;
+        background: #ffe3e3;
+        filter: alpha(opacity=50);
+        border-radius: 2px;
+        border: 1px solid #fc8888;
+      }
+      .filter {
+        image-rendering: -webkit-optimize-contrast;
+      }
+      .side-panel {
+        position: fixed;
+        right: -50%;
+        top: 0;
+        height: 100vh;
+        width: 300px;
+        background: #fff;
+        box-shadow: rgb(0 0 0 / 40%) 0px 2px 4px,
+          rgb(0 0 0 / 30%) 0px 7px 13px -3px,
+          rgb(0 0 0 / 20%) 0px -3px 0px inset;
+        transition: all 0.3s linear;
+        z-index: 3147483650 !important;
+      }
+      .side-panel.active {
+        right: 0;
+        display: block;
+        z-index: 3147483650 !important;
+        animation: sidepanel_animation 200ms linear;
+      }
+      .minimize-icon-container {
+        position: absolute;
+        right: 5%;
+        top: 2%;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid #f6f6f6;
+        cursor: pointer;
+      }
+
+      @keyframes sidepanel_animation {
+        from {
+          right: -50%;
+        }
+        to {
+          right: 0;
+        }
+      }
+      .search-result {
+        width: 95%;
+        height: 75%;
+        margin: 0.5em auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.8em;
+        display: none;
+        /* border: 1px solid crimson; */
+      }
+      .search-result.active {
+        display: flex;
+      }
+
+      .record {
+        width: 95%;
+        height: 80px;
+        margin: 1em auto;
+        background: #ffffff;
+        box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.08);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+      }
+
+      .record-img-name {
+        width: 60%;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        /* justify-content: space-evenly; */
+      }
+
+      .profile-img {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+      }
+
+      .profile-image {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+      }
+
+      .unlock-details-btn {
+        font-size: 12px;
+        margin: 1em 0;
+        border: none;
+        background: #ffffff;
+        outline: none;
+        border-bottom: 1px solid #fb3e3e;
+        color: #fb3e3e;
+      }
+
+      .search-specific-user {
+        width: 95%;
+        height: 55%;
+        margin: 0.5em auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: #ffffff;
+        box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.08);
+        border-radius: 10px;
+      }
+
+      .search-specific-user.active {
+        display: flex;
+      }
+
+      .user-name-img {
+        width: 90%;
+        margin: 0em auto;
+        padding: 0.8em 0.8em;
+        display: flex;
+        align-items: center;
+        gap: 0.5em;
+        border-bottom: 1px dashed #ffe3e3;
+        /* border: 1px solid crimson; */
+      }
+
+      .user-mail-phone {
+        width: 90%;
+        height: 50%;
+        margin: 1em auto;
+        /* border: 1px solid crimson; */
+      }
+
+      .personal-info {
+        width: 100%;
+        margin: 1em auto;
+        height: 60px;
+        background: #ffffff;
+        box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.08);
+        border-radius: 5px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+      }
+
+      .snack {
+        background: #f0ad4e;
+        opacity: 0;
+        animation: snack_animation 3s linear;
+      }
+      @keyframes snack_animation {
+        0% {
+          opacity: 0;
+        }
+        50% {
+          opacity: 1;
+        }
+        75% {
+          opacity: 0.5;
+        }
+        100% {
+          display: none;
+          opacity: 0;
+        }
+      }
+
+      .personal-info span {
+        font-size: 12px;
+        max-width: 80%;
+        min-width: 80%;
+        word-break: break-all;
+      }
+
+      .no-profile {
+        width: 90%;
+        padding: 5em auto;
+        text-align: center;
+      }
+      .blur {
+        -webkit-filter: blur(5px);
+        -moz-filter: blur(5px);
+        -o-filter: blur(5px);
+        -ms-filter: blur(5px);
+        filter: blur(5px);
+      }
+      #user-work-email {
+        font-weight: 500;
+        font-size: 14px;
+      }
+      .info-icons {
+        width: 23px;
+        height: 23px;
+      }
+      .verified-icon {
+        width: 10px;
+        height: 10px;
+        margin-bottom: 5px;
+      }
+    </style>
+    <link rel="stylesheet" href="sidepanel.css" />
+  </head>
+  <body>
+    <!-- <div class="lead-extension">
+    <button class="extension-btn">
+      <div class="img-container">
+        <img src="Group 2995.png" alt="" class="extension-icon" />
+        <h5 class="comp-name">Leadzen</h5>
+      </div>
+      <div class="drag-btn">
+        <div id="cube">
+          <svg
+            width="16"
+            height="16"
+            class="filter"
+            viewBox="0 0 16 16"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M11 6C11 6.55228 11.4477 7 12 7C12.5523 7 13 6.55228 13 6C13 5.44772 12.5523 5 12 5C11.4477 5 11 5.44772 11 6ZM7 6C7 6.55228 7.44772 7 8 7C8.55228 7 9 6.55228 9 6C9 5.44772 8.55228 5 8 5C7.44772 5 7 5.44771 7 6ZM3 6C3 6.55228 3.44771 7 4 7C4.55229 7 5 6.55228 5 6C5 5.44771 4.55229 5 4 5C3.44771 5 3 5.44771 3 6ZM8 11C7.44772 11 7 10.5523 7 10C7 9.44771 7.44772 9 8 9C8.55228 9 9 9.44772 9 10C9 10.5523 8.55228 11 8 11ZM12 11C11.4477 11 11 10.5523 11 10C11 9.44772 11.4477 9 12 9C12.5523 9 13 9.44772 13 10C13 10.5523 12.5523 11 12 11ZM3 10C3 10.5523 3.44771 11 4 11C4.55228 11 5 10.5523 5 10C5 9.44771 4.55229 9 4 9C3.44771 9 3 9.44771 3 10Z"
+              fill="#8B8B8B"
+            ></path>
+          </svg>
+        </div>
+      </div>
+    </button>
+    <div class="side-panel">
+      <div class="minimize-icon-container">
+        <svg
+          width="12"
+          height="2"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M1 0h10c.55 0 1 .45 1 1s-.45 1-1 1H1c-.55 0-1-.45-1-1s.45-1 1-1z"
+            fill="#8B8B8B"
+          ></path>
+        </svg>
+      </div>
+    </div>
+   </div>
+   <section class="search-specific-user">
+    <div class="user-name-img">
+      <img src="${specificUser.image_url}" class="profile-image" />
+      <h5>${specificUser.full_name}</h5>
+    </div>
+    <div class="user-mail-phone">
+      <div class="personal-info">
+        <img src="${chrome.runtime.getURL("/images/Group_1338.png")}" alt="#" class="info-icons"/>
+        <span id="user-phone-number" class="blur">not yet searched</span>
+        <button class="unlock-details-btn" id="unlock-phone-btn">Unlock Phone</button>
+      </div>
+      <div class="personal-info">
+        <span id="user-work-email" > <img src="Verified.png" alt="#" class="verified-icon" />  musab.momin@outlook.com </span>
+        <button class="unlock-details-btn" id="unlock-email-btn">Unlock Email</button>
+      </div>
+      <div class="personal-info snack">
+        <span>You have insufficient credits</span>
+      </div>
+    </div>
+   </section> -->
+
+    <div class="side-panel" id="sidepanel" style="right: 0px">
+
+      <div class="ex-container active">
+        <div class="tabs-btn">
+          <button class="active">Search On Leadzen</button>
+          <button class="">Search here</button>
+        </div>
+        <section class="mssg-for-user">Bad Credentials</section>
+        <div class="minimize-icon-container">
+          <svg
+            width="12"
+            height="2"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M1 0h10c.55 0 1 .45 1 1s-.45 1-1 1H1c-.55 0-1-.45-1-1s.45-1 1-1z"
+              fill="#8B8B8B"
+            ></path>
+          </svg>
+        </div>
+
+        <section class="platform-sec">
+          <form method="post" class="login-frm">
+            <div class="frm-row">
+              <img
+                src="chrome-extension://biphmonfkcdmdpmmaoobbbjpomfbghhc/images/logo.webp"
+                alt="#"
+              />
+            </div>
+            <div class="frm-row">
+              <input
+                type="email"
+                name="email"
+                id="email"
+                placeholder="Enter Email Address"
+                required=""
+              />
+            </div>
+            <div class="frm-pass-row">
+              <input
+                type="password"
+                name="password"
+                id="ex-password"
+                placeholder="Enter Your Password"
+                required=""
+              />
+              <button class="toggle-mode-btn">
+                <img
+                  src="chrome-extension://biphmonfkcdmdpmmaoobbbjpomfbghhc/images/eye.webp"
+                  alt="#"
+                  class="eye-img"
+                />
+              </button>
+            </div>
+            <div class="frm-row">
+              <button type="submit" id="login-btn">Sign in</button>
+            </div>
+          </form>
+        </section>
+
+        <section class="app-sec active">
+          <div class="extension-search active">
+            <div class="nav">
+              <div>
+                <img
+                  src="chrome-extension://biphmonfkcdmdpmmaoobbbjpomfbghhc/images/logo.webp"
+                  alt="#"
+                />
+              </div>
+              <div class="credits">
+                <p><span id="credits-total">25</span> Credits Left</p>
+              </div>
+            </div>
+            <div class="fetch-btn">
+              <button id="fetch-btn">Fetch Details</button>
+            </div>
+          </div>
+          <div class="platform-search">
+            <div class="form-and-btn">
+              <button class="btn" id="search-leadzen">
+                Start searching on Leadzen
+              </button>
+            </div>
+
+          </div>
+        </section>
+      </div>
+
+      <div class="result-container" id="result-container">
+        <div class="tabs-btn">
+          <button id="setup-btn" class="active">Your Search</button>
+          <button id="platform-btn" class="">Specific Profile</button>
+        </div>
+
+        <section class="nav">
+          <div class="back-btn">
+            <img
+              src="chrome-extension://biphmonfkcdmdpmmaoobbbjpomfbghhc/images/back-union.webp"
+              alt="#"
+            />
+          </div>
+          <div class="credits">
+            <p><span id="total-credits">25</span> Credits Left</p>
+          </div>
+        </section>
+        <section class="search-result active">
+          <div class="record">
+            <div class="record-img-name">
+              <img
+                src="https://media-exp1.licdn.com/dms/image/C4E03AQHdGdKOlqbWDA/profile-displayphoto-shrink_200_200/0/1641272707111?e=1646870400&amp;v=beta&amp;t=Mv9-cf7X6uRzWXmKVoRXhF0yPtn2ceYAAL15N5yf9ik"
+                class="profile-img"
+              />
+              <h5>Ayush Upadhayay</h5>
+            </div>
+            <div>
+              <button
+                class="unlock-details-btn"
+                id="a6901947-ff5a-4b00-8ea0-c8c6edc26613"
+              >
+                Unlock Details
+              </button>
+            </div>
+          </div>
+        </section>
+        <section class="search-specific-user">
+          <div class="user-name-img">
+            <img
+              src="https://media-exp1.licdn.com/dms/image/C4E03AQHdGdKOlqbWDA/profile-displayphoto-shrink_200_200/0/1641272707111?e=1646870400&amp;v=beta&amp;t=Mv9-cf7X6uRzWXmKVoRXhF0yPtn2ceYAAL15N5yf9ik"
+              class="profile-image"
+            />
+            <h5>Ayush Upadhayay</h5>
+          </div>
+          <div class="user-mail-phone">
+            <div class="personal-info">
+              <span id="user-phone-number" class="blur">not yet searched</span>
+              <button class="unlock-details-btn" id="unlock-phone-btn">
+                Unlock Phone
+              </button>
+            </div>
+            <div class="personal-info">
+              <span id="user-work-email" class="">email not found</span>
+              <button class="unlock-details-btn" id="unlock-email-btn">
+                Unlock Email
+              </button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script>
+      let container = document.querySelector(".extension-btn");
+      let dragBtn = document.querySelector(".drag-btn");
+      let sidePanel = document.querySelector(".side-panel");
+      let imgButton = document.querySelector(".img-container");
+      let minimizeBtn = document.querySelector(".minimize-icon-container");
+
+      const update = (ev) => {
+        let getStyle = window.getComputedStyle(container);
+        let top = parseInt(getStyle.top);
+
+        container.style.top = `${top + ev.movementY}px`;
+      };
+
+      dragBtn.addEventListener("mousedown", (ev) => {
+        window.addEventListener("mousemove", update);
+
+        window.addEventListener("mouseup", () => {
+          window.removeEventListener("mousemove", update);
+        });
+      });
+
+      imgButton.addEventListener("click", () => {
+        sidePanel.style.right = "0";
+      });
+
+      minimizeBtn.addEventListener("click", () => {
+        sidePanel.style.right = "-50%";
+      });
+    </script>
+  </body>
+</html>

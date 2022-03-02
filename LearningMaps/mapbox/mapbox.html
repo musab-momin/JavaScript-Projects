@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Map-box</title>
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script>
+    <script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.2.2/mapbox-gl-draw.js"></script>
+    <link rel="stylesheet" href="mapbox.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css">
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.2.2/mapbox-gl-draw.css" type="text/css">
+  </head>
+  <body>
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.css"
+      type="text/css"
+    />
+    <div class="options">
+      <select id="places-select" autocomplete="off">
+        <option value="none" selected>Choose a place type...</option>
+        <option value="Schools">Schools</option>
+        <option value="Banks">Banks</option>
+        <option value="Offices">Offices</option>
+        <option value="Hotel">Hotels</option>
+        <option value="Parks and Outdoors">Parks and Outdoors</option>
+      </select>
+    </div>
+
+    <div class="filters">
+     <div class="filters__head">
+        <h3>Data Layers</h3>
+        <div class="filters_drop-btn"><i class="fas fa-chevron-down"></i></div>
+     </div>
+     <div class="filters_dropdown remove">
+        <div class="filters__checkbox-container">
+          <label for="banks">Banks</label>
+          <input type="checkbox" id="banks" value="Banks" class="filters__checkbox"/>
+        </div>
+        <div class="filters__checkbox-container">
+          <label for="schools">Schools</label>
+          <input type="checkbox" id="schools" value="Schools" class="filters__checkbox" />
+        </div>
+        <div class="filters__checkbox-container">
+          <label for="Societies">Societies</label>
+          <input type="checkbox" id="Societies" value="Societies" class="filters__checkbox"/>
+        </div>
+        <div class="filters__checkbox-container">
+          <label for="Grocery Stores">Grocery Stores</label>
+          <input type="checkbox" id="Grocery Stores" value="Grocery_Stores" class="filters__checkbox" />
+        </div>
+        <div class="filters__checkbox-container">
+          <label for="Hospitals">Hospitals</label>
+          <input type="checkbox" id="Hospitals" value="Hospitals" class="filters__checkbox" />
+        </div>
+        <div class="filters__checkbox-container">
+          <label for="Offices">Offices</label>
+          <input type="checkbox" id="Offices" value="Offices" class="filters__checkbox" />
+        </div>
+     </div>
+    </div>
+
+    <div class="draw">
+      <div class="draw__population">
+        <i class="fas fa-user-friends fa-1x"></i>
+      </div>
+    </div>
+
+    <div class="info">
+      <div class="info__single-info">
+        <div class="marker" style="background: green;"></div>
+        <span>Schools</span>
+      </div>
+      <div class="info__single-info">
+        <div class="marker" style="background: red;"></div>
+        <span>Banks</span>
+      </div>
+      <div class="info__single-info">
+        <div class="marker" style="background: blue;"></div>
+        <span>Societies</span>
+      </div>
+    </div>
+    <div id="map"></div>
+
+    <script src="mapbox.js" defer></script>
+  </body>
+</html>

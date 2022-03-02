@@ -1,0 +1,96 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
+    <title>Experiment on OpenLayers</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.7.0/css/ol.css"
+      type="text/css"
+    />
+    <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.7.0/build/ol.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/ol-mapbox-style@6.1.4/dist/olms.js"
+      type="text/javascript"
+    ></script>
+
+    <script src="https://unpkg.com/@esri/arcgis-rest-request@3.0.0/dist/umd/request.umd.js"></script>
+    <script src="https://unpkg.com/@esri/arcgis-rest-geocoding@3.0.0/dist/umd/geocoding.umd.js"></script>
+
+    <script src="https://unpkg.com/@esri/arcgis-rest-auth@3.0.0/dist/umd/auth.umd.js"></script>
+    <link rel="stylesheet" href="map.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css">
+  </head>
+
+  <body>
+    <div id="map"></div>
+
+    <select id="places-select" autocomplete="off">
+      <option value="" selected>Choose a place type...</option>
+      <option value="Coffee shop">Coffee shops</option>
+      <option value="Gas station">Gas stations</option>
+      <option value="Food">Food</option>
+      <option value="Hotel">Hotels</option>
+      <option value="Parks and Outdoors">Parks and Outdoors</option>
+    </select>
+
+    <div id="basemaps-wrapper">
+      <select id="basemaps" autocomplete="off">
+        <option value="" selected>Choose map...</option>
+        <option value="ArcGIS:Streets">Streets</option>
+        <option value="ArcGIS:Navigation">Navigation</option>
+        <option value="ArcGIS:Topographic">Topographic</option>
+        <option value="ArcGIS:LightGray">Light Gray</option>
+        <option value="ArcGIS:DarkGray">Dark gray</option>
+        <option value="ArcGIS:StreetsRelief">Streets Relief</option>
+        <option value="ArcGIS:Imagery:Standard">Imagery</option>
+        <option value="ArcGIS:ChartedTerritory">ChartedTerritory</option>
+        <option value="ArcGIS:ColoredPencil">ColoredPencil</option>
+        <option value="ArcGIS:Nova">Nova</option>
+        <option value="ArcGIS:Midcentury">Midcentury</option>
+        <option value="OSM:Standard">OSM</option>
+        <option value="OSM:Streets">OSM:Streets</option>
+      </select>
+    </div>
+
+    
+    <div class="filters">
+      <div class="filters__head">
+         <h3>Data Layers</h3>
+         <div class="filters_drop-btn"><i class="fas fa-chevron-down"></i></div>
+      </div>
+      <div class="filters_dropdown remove">
+         <div class="filters__checkbox-container">
+           <label for="banks">Banks</label>
+           <input type="checkbox" id="banks" value="Banks" class="filters__checkbox"/>
+         </div>
+         <div class="filters__checkbox-container">
+           <label for="schools">Schools</label>
+           <input type="checkbox" id="schools" value="Schools" class="filters__checkbox" />
+         </div>
+         <div class="filters__checkbox-container">
+           <label for="Societies">Societies</label>
+           <input type="checkbox" id="Societies" value="Societies" class="filters__checkbox"/>
+         </div>
+         <div class="filters__checkbox-container">
+           <label for="Grocery Stores">Grocery Stores</label>
+           <input type="checkbox" id="Grocery Stores" value="Grocery_Stores" class="filters__checkbox" />
+         </div>
+         <div class="filters__checkbox-container">
+           <label for="Hospitals">Hospitals</label>
+           <input type="checkbox" id="Hospitals" value="Hospitals" class="filters__checkbox" />
+         </div>
+         <div class="filters__checkbox-container">
+           <label for="Offices">Offices</label>
+           <input type="checkbox" id="Offices" value="Offices" class="filters__checkbox" />
+         </div>
+      </div>
+     </div>
+
+
+    <script src="apijs.js" defer></script>
+  </body>
+</html>
